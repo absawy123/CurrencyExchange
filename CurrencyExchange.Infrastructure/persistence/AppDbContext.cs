@@ -15,29 +15,6 @@ namespace CurrencyExchange.Infrastructure.persistence
             
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            // Find USD currency ID (assuming it exists)
-            var usdCurrencyId = 1; // Change if needed (get actual ID in a real case)
-
-            var random = new Random();
-            var exchangeRates = new List<ExchangeRate>();
-
-            for (int i = 2; i <= 200; i++) // Assuming ID 1 is USD
-            {
-                exchangeRates.Add(new ExchangeRate
-                {
-                    Id = i, // Ensure unique IDs
-                    CurrencyId = i,
-                    Rate = (decimal)(random.NextDouble() * (5 - 0.1) + 0.1), // Random rates from 0.1 to 5
-                    RateDate = DateOnly.FromDateTime(DateTime.UtcNow)
-                });
-            }
-
-            modelBuilder.Entity<ExchangeRate>().HasData(exchangeRates);
-        }
     }
 
 }
