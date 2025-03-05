@@ -10,7 +10,7 @@ namespace CurrencyExchange.Infrastructure.persistence.configurations
         {
             builder.ToTable("ExchangeRates").HasKey(e => e.Id);
             builder.Property(e => e.Rate).HasPrecision(10, 3);
-
+            builder.HasIndex(ex => ex.RateDate);
 
         }
     }

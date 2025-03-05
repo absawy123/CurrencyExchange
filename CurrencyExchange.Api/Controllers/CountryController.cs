@@ -1,12 +1,14 @@
 ﻿using CurrencyExchange.Application.Dtos.country;
 using CurrencyExchange.Application.Services;
 using CurrencyExchange.Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CountryExchange.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
+    [Authorize("Admin")]
     public class CountryController : ControllerBase
     {
         private readonly CountryService _countryService;

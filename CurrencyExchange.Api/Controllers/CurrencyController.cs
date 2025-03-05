@@ -2,12 +2,14 @@
 using CurrencyExchange.Application.Dtos.country;
 using CurrencyExchange.Application.Services;
 using CurrencyExchange.Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CurrencyExchange.Api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize("Admin")]
     public class CurrencyController : ControllerBase
     {
         private readonly CurrencyService _currencyService;

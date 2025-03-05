@@ -1,5 +1,8 @@
 
+using CurrencyExchange.Core.Entities;
 using CurrencyExchange.Infrastructure.Extensions;
+using CurrencyExchange.Infrastructure.persistence;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace CurrencyExchange.Api
@@ -17,6 +20,15 @@ namespace CurrencyExchange.Api
 
             var connectionString = builder.Configuration.GetConnectionString("constr");
             builder.Services.AddInfrastructureServices(connectionString);
+            builder.Services.AddIdentity<ApplicationUser,IdentityRole<int>>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+            })
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
 
             var app = builder.Build();
 
@@ -30,7 +42,7 @@ namespace CurrencyExchange.Api
             }
 
             app.UseHttpsRedirection();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
