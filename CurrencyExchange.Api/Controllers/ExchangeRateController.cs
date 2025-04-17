@@ -16,6 +16,7 @@ namespace CurrencyExchange.Api.Controllers
             _exchangeRateService = exchangeRateService;
 
         }
+
         [HttpGet("GetRatesAt")]
         public async Task<ActionResult<IEnumerable<ExchangeRateDto>>> GetRatesAt(DateTime date)
         {
